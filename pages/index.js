@@ -1,6 +1,6 @@
 import React from "react";
 import { Layout } from "../components/common";
-import { About, Newest, Popular } from "../components/Home";
+import { About, MostPopular } from "../components/Home";
 import styles from "../styles/Home.module.css";
 
 const Home = () => {
@@ -8,8 +8,7 @@ const Home = () => {
 		<Layout>
 			<div className={styles.home}>
 				<About />
-				<Newest />
-				<Popular />
+				<MostPopular />
 			</div>
 		</Layout>
 	);

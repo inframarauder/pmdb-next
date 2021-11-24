@@ -28,3 +28,27 @@
 	text-align: left;
 	padding: 10px;
 }
+
+.mostPopularCard {
+	border: 1px solid var(--main-bg-color);
+}
+
+.mostPopularCardPoster {
+	height: 400px;
+	object-fit: fill;
+}
+
+.mostPopularCardFooter {
+	background-color: var(--main-bg-color);
+}
+
+.mostPopularCardLink {
+	color: var(--main-text-color);
+	text-decoration: none;
+}
+
+.mostPopularCardLink:hover {
+	color: var(--main-text-color);
+	font-size: 1.2rem;
+	transition: 0.3s ease-out;
+}

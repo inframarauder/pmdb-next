@@ -1,5 +1,4 @@
 import About from "./About";
-import Newest from "./Newest";
-import Popular from "./Popular";
+import MostPopular from "./MostPopular";
 
-export { About, Newest, Popular };
+export { About, MostPopular };
