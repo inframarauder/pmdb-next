@@ -67,7 +67,7 @@ const MostPopular = () => {
 			</Row>
 
 			<Link href="/titles">
-				<Button variant="primary" className="my-4 remove-focus">
+				<Button variant="primary" className={styles.exploreMoreBtn}>
 					Explore more
 				</Button>
 			</Link>

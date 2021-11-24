@@ -8,7 +8,7 @@ const Footer = () => {
 				PMDb Next ©️ 2021 <br />
 				Made with ❤️ by{" "}
 				<a
-					href="/contact"
+					href="https://subhasis.vercel.app"
 					target="_blank"
 					rel="noopener noreferrer"
 					className={styles.footer_link}
