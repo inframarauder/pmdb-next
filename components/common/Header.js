@@ -46,6 +46,9 @@ const Header = () => {
 							<Nav.Link href="/explore" className={styles.header_link}>
 								Explore
 							</Nav.Link>
+							<Nav.Link href="/about" className={styles.header_link}>
+								About PMDb Next
+							</Nav.Link>
 							<Nav.Link href="/auth" className={styles.header_link}>
 								Login
 							</Nav.Link>

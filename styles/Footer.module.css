@@ -1,18 +1,18 @@
 .footer {
-	background-color: #0d6efd;
+	background-color: var(--main-bg-color);
 	background-blend-mode: multiply;
 	bottom: 0;
 	padding: 15px;
 	font-size: 1.2rem;
-	color: #fff;
+	color: var(--main-text-color);
 }
 
 .footer_link {
-	color: #fff;
+	color: var(--main-text-color);
 }
 
 .footer_link:hover {
-	color: #fff;
+	color: var(--main-text-color);
 	text-decoration: underline;
 	cursor: pointer;
 	transition: 0.3s ease-in;
