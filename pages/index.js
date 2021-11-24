@@ -4,7 +4,9 @@ import { Layout } from "../components/common";
 const Home = () => {
 	return (
 		<Layout>
-			<h1>Home</h1>
+			<div style={{ minHeight: "80vh" }}>
+				<h1>Home</h1>
+			</div>
 		</Layout>
 	);
 };
