@@ -1,4 +1,5 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
 
 * {
 	padding: 0;
@@ -21,8 +22,14 @@
 	background: #555;
 }
 
+body {
+	overflow-x: hidden;
+	font-family: "Lato", sans-serif;
+}
+
 :root {
 	--main-bg-color: #0d6efd;
+	--secondary-bg-color: #f1f1f1;
 	--main-text-color: #fff;
 }
 

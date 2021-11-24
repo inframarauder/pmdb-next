@@ -13,7 +13,12 @@ import styles from "../../styles/Header.module.css";
 
 const Header = () => {
 	return (
-		<Navbar variant="dark" expand={false} bg="primary">
+		<Navbar
+			variant="dark"
+			expand={false}
+			bg="primary"
+			className={styles.header}
+		>
 			<Container fluid>
 				<Navbar.Brand href="/">PMDb Next!</Navbar.Brand>
 				<Navbar.Toggle
@@ -45,9 +50,6 @@ const Header = () => {
 						<Nav className="justify-content-end flex-grow-1 pe-3">
 							<Nav.Link href="/explore" className={styles.header_link}>
 								Explore
-							</Nav.Link>
-							<Nav.Link href="/about" className={styles.header_link}>
-								About PMDb Next
 							</Nav.Link>
 							<Nav.Link href="/auth" className={styles.header_link}>
 								Login

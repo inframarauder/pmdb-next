@@ -1,0 +1,27 @@
+.home {
+	min-height: 79vh;
+	max-width: 100vw;
+}
+
+.about {
+	padding: 10px;
+	background-color: var(--main-bg-color);
+	color: var(--main-text-color);
+}
+
+.aboutLottieContainer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.aboutLottie {
+	height: 400px;
+	width: 400px;
+	background-color: var(--secondary-bg-color);
+	border-radius: 10px;
+}
+
+.aboutInfo {
+	font-size: 1.2rem;
+}
