@@ -22,6 +22,9 @@
 	border-radius: 10px;
 }
 
-.aboutInfo {
-	font-size: 1.2rem;
+.accordionBody {
+	background-color: var(--secondary-bg-color);
+	color: var(--secondary-text-color);
+	text-align: left;
+	padding: 10px;
 }
