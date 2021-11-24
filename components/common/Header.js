@@ -18,6 +18,7 @@ const Header = () => {
 			expand={false}
 			bg="primary"
 			className={styles.header}
+			sticky="top"
 		>
 			<Container fluid>
 				<Navbar.Brand href="/">PMDb Next!</Navbar.Brand>
