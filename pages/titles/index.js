@@ -16,7 +16,7 @@ const Explore = ({ titles }) => {
 				</legend>
 				<Row className="g-4 my-2">
 					{titles.map((title) => (
-						<Col md={6} key={title._id}>
+						<Col md={3} xs={6} key={title._id}>
 							<TitleCard title={title} />
 						</Col>
 					))}
@@ -28,8 +28,13 @@ const Explore = ({ titles }) => {
 
 export async function getStaticProps(context) {
 	const projections = {
-		plot: 0,
-		trailerLink: 0,
+		name: 1,
+		poster: 1,
+		language: 1,
+		year: 1,
+		rating: 1,
+		genres: 1,
+		streamingOn: 1,
 	};
 	const data = await Title.find({}, projections).sort({ ratiing: -1 }).lean();
 	const serializedData = JSON.parse(JSON.stringify(data));

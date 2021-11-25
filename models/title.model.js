@@ -62,8 +62,13 @@ const titleSchema = new Schema(
 		},
 		streamingOn: [
 			{
-				platformName: { type: String, required: true },
-				streamingLink: { type: String, required: true },
+				name: { type: String, required: true },
+				url: { type: String, required: true },
+				code: {
+					type: String,
+					required: true,
+					enum: ["netflix", "prime", "hotstar", "youtube", "other"],
+				},
 			},
 		],
 	},

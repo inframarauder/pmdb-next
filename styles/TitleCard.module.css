@@ -1,36 +1,39 @@
 .titleCard {
-	text-align: left;
-	height: 500px;
+	text-align: center;
+	background-color: var(--main-bg-color);
+	color: var(--main-text-color);
+}
+
+.titleCard:hover {
+	cursor: pointer;
+	padding: 10px;
+	transition: 0.3s ease-in;
 }
 
 .titleCardPoster {
-	height: 350px;
-	padding: 10px;
-	object-fit: contain;
+	height: 400px;
+	object-fit: fill;
 }
 
 .titleCardTitle {
-	background-color: var(--main-bg-color);
-	color: var(--main-text-color);
-	padding: 10px;
+	margin-top: 5px;
+	text-align: start;
+	padding: 5px;
+}
+
+.titleLine {
 	display: flex;
-	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
+	margin-top: 5px;
 }
 
 .smallInfo {
 	font-size: 0.8rem;
 }
 
-.titleCardLink {
-	color: var(--main-text-color);
-	text-decoration: none;
-	cursor: pointer;
-}
-
-.titleCardLink:hover {
-	color: var(--main-text-color);
-	font-size: 1.5rem;
-	transition: 0.3s ease-out;
+@media only screen and (max-width: 600px) {
+	.titleCardPoster {
+		height: 300px;
+	}
 }

@@ -12,7 +12,7 @@ const MostPopular = ({ mostPopular }) => {
 			<Row>
 				{mostPopular.map((title, index) => {
 					return (
-						<Col key={index} md={6} className="my-2">
+						<Col key={index} md={3} xs={6} className="my-2">
 							<TitleCard title={title} />
 						</Col>
 					);

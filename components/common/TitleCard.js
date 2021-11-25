@@ -1,56 +1,50 @@
-import React from "react";
-import { Card, Row, Col } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { Card } from "react-bootstrap";
 import Link from "next/link";
 import styles from "../../styles/TitleCard.module.css";
 
 const TitleCard = ({ title }) => {
+	const [showDetails, setShowDetails] = useState(true);
+
+	const updateCardView = () => {
+		if (window.innerWidth < 1200) {
+			setShowDetails(false);
+		} else {
+			setShowDetails(true);
+		}
+	};
+
+	useEffect(() => {
+		updateCardView();
+		window.addEventListener("resize", updateCardView);
+		return () => {
+			window.removeEventListener("resize", updateCardView);
+		};
+	}, []);
+
 	return (
-		<Card className={styles.titleCard}>
-			<Card.Title className={styles.titleCardTitle}>
-				<Link href={`/titles/${title._id}`}>
-					<span>
-						<a className={styles.titleCardLink}>
-							{title.name} ({title.year})
-						</a>
+		<Link href={`/titles/${title._id}`}>
+			<Card className={styles.titleCard}>
+				<Card.Img
+					variant="top"
+					src={title.poster}
+					className={styles.titleCardPoster}
+				/>
+				{showDetails && (
+					<Card.Title className={styles.titleCardTitle}>
+						<div className={styles.titleLine}>
+							{title.name} <strong>{title.rating}</strong>
+						</div>
+
+						<span className={styles.smallInfo}>{title.year}</span>
 						<br />
-						<small className={styles.smallInfo}>{title.language}</small>
-					</span>
-				</Link>
-				<span>
-					<strong>{title.rating}</strong>/
-					<small className={styles.smallInfo}>10</small>
-				</span>
-			</Card.Title>
-			<Row>
-				<Col>
-					<img
-						src={title.poster}
-						alt={title.name}
-						className={styles.titleCardPoster}
-					/>
-				</Col>
-				<Col>
-					<Card.Body>
-						<Card.Text>
-							Genres <br />
-							<span className={styles.smallInfo}> {title.genres}</span>
-						</Card.Text>
-						<Card.Text>
-							Cast <br />
-							<span className={styles.smallInfo}> {title.cast}</span>
-						</Card.Text>
-						<Card.Text>
-							Directed By <br />
-							<span className={styles.smallInfo}> {title.directedBy}</span>
-						</Card.Text>
-						<Card.Text>
-							Written By <br />
-							<span className={styles.smallInfo}> {title.writtenBy}</span>
-						</Card.Text>
-					</Card.Body>
-				</Col>
-			</Row>
-		</Card>
+						<span className={styles.smallInfo}>{title.language}</span>
+						<br />
+						<span className={styles.smallInfo}>{title.genres}</span>
+					</Card.Title>
+				)}
+			</Card>
+		</Link>
 	);
 };
 
