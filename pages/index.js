@@ -19,10 +19,18 @@ const Home = ({ mostPopular }) => {
 };
 
 export async function getStaticProps(context) {
-	const mostPopular = await Title.find().sort({ rating: -1 }).limit(10);
+	const data = await Title.find(
+		{},
+		{ name: 1, rating: 1, poster: 1, year: 1, genres: 1 }
+	)
+		.sort({ rating: -1 })
+		.limit(10)
+		.lean();
+
+	const serializedData = JSON.parse(JSON.stringify(data));
 	return {
 		props: {
-			mostPopular: JSON.parse(JSON.stringify(mostPopular)),
+			mostPopular: serializedData,
 		},
 	};
 }

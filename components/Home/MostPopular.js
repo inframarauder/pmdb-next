@@ -20,9 +20,13 @@ const MostPopular = ({ mostPopular }) => {
 								/>
 								<Card.Body>
 									<Card.Title>
-										{title.title} ({title.year})
+										{title.name} ({title.year})
 									</Card.Title>
-									<Card.Text>{title.rating}/10</Card.Text>
+									<Card.Text>
+										{title.rating}/10
+										<br />
+										{title.genres}
+									</Card.Text>
 								</Card.Body>
 								<Card.Footer className={styles.mostPopularCardFooter}>
 									<Link href={`/titles/${title._id}`}>
