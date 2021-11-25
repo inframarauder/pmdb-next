@@ -67,9 +67,7 @@ const MostPopular = () => {
 			</Row>
 
 			<Link href="/titles">
-				<Button variant="primary" className={styles.exploreMoreBtn}>
-					Explore more
-				</Button>
+				<Button className={styles.exploreMoreBtn}>Explore more</Button>
 			</Link>
 		</Container>
 	);

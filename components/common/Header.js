@@ -16,7 +16,6 @@ const Header = () => {
 		<Navbar
 			variant="dark"
 			expand={false}
-			bg="primary"
 			className={styles.header}
 			sticky="top"
 		>

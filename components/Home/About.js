@@ -31,8 +31,12 @@ const About = () => {
 						className={styles.aboutLottie}
 					/>
 				</Col>
-				<Col className="text-center">
-					<h3 className="my-4 text-center">Welcome to PMDb Next!</h3>
+				<Col>
+					<h3 className="my-4">Welcome to PMDb Next!</h3>
+					<span>
+						Public Movie Database (PMDb) Next is an opensource movie database
+						and review application built entirely using Next.js!
+					</span>
 					<hr />
 					<Accordion>
 						{accordionData.map((item, index) => (

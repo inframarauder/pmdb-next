@@ -1,6 +1,5 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
-@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 * {
 	padding: 0;
 	margin: 0;
@@ -24,11 +23,11 @@
 
 body {
 	overflow-x: hidden;
-	font-family: "Lato", sans-serif;
+	font-family: "Roboto", sans-serif;
 }
 
 :root {
-	--main-bg-color: #0d6efd;
+	--main-bg-color: #1f5fc0d7;
 	--secondary-bg-color: #f1f1f1;
 	--main-text-color: #fff;
 	--secondary-text-color: #000;
