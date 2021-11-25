@@ -1,8 +1,11 @@
 import React from "react";
-import axios from "axios";
 import { Layout } from "../components/common";
 import { About, MostPopular } from "../components/Home";
 import styles from "../styles/Home.module.css";
+import { connectDb } from "../utils/db";
+import Title from "../models/title.model";
+
+connectDb();
 
 const Home = ({ mostPopular }) => {
 	return (
@@ -16,10 +19,10 @@ const Home = ({ mostPopular }) => {
 };
 
 export async function getStaticProps(context) {
-	const res = await axios.get("http://localhost:3000/api/titles/most_popular");
+	const mostPopular = await Title.find().sort({ rating: -1 }).limit(10);
 	return {
 		props: {
-			mostPopular: res.data.titles,
+			mostPopular: JSON.parse(JSON.stringify(mostPopular)),
 		},
 	};
 }
