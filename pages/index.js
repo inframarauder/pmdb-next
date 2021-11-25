@@ -26,7 +26,6 @@ export async function getStaticProps(context) {
 		year: 1,
 		rating: 1,
 		genres: 1,
-		streamingOn: 1,
 	};
 	const data = await Title.find({}, projections)
 		.sort({ rating: -1 })
