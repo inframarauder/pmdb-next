@@ -1,7 +1,8 @@
 import React from "react";
-import { Container, Row, Col, Card, Button } from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap";
 import Link from "next/link";
 import styles from "../../styles/Home.module.css";
+import { TitleCard } from "../common";
 
 const MostPopular = ({ mostPopular }) => {
 	return (
@@ -11,29 +12,8 @@ const MostPopular = ({ mostPopular }) => {
 			<Row>
 				{mostPopular.map((title, index) => {
 					return (
-						<Col key={index} md={3} className="my-2">
-							<Card className={styles.mostPopularCard}>
-								<Card.Img
-									variant="top"
-									src={title.poster}
-									className={styles.mostPopularCardPoster}
-								/>
-								<Card.Body>
-									<Card.Title>
-										{title.name} ({title.year})
-									</Card.Title>
-									<Card.Text>
-										{title.rating}/10
-										<br />
-										{title.genres}
-									</Card.Text>
-								</Card.Body>
-								<Card.Footer className={styles.mostPopularCardFooter}>
-									<Link href={`/titles/${title._id}`}>
-										<a className={styles.mostPopularCardLink}>View Title</a>
-									</Link>
-								</Card.Footer>
-							</Card>
+						<Col key={index} md={6} className="my-2">
+							<TitleCard title={title} />
 						</Col>
 					);
 				})}

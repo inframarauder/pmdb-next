@@ -19,10 +19,11 @@ const Home = ({ mostPopular }) => {
 };
 
 export async function getStaticProps(context) {
-	const data = await Title.find(
-		{},
-		{ name: 1, rating: 1, poster: 1, year: 1, genres: 1 }
-	)
+	const projections = {
+		plot: 0,
+		trailerLink: 0,
+	};
+	const data = await Title.find({}, projections)
 		.sort({ rating: -1 })
 		.limit(10)
 		.lean();

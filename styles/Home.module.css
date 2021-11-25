@@ -29,30 +29,6 @@
 	padding: 10px;
 }
 
-.mostPopularCard {
-	padding: 10px;
-}
-
-.mostPopularCardPoster {
-	height: 400px;
-	object-fit: contain;
-}
-
-.mostPopularCardFooter {
-	background-color: var(--main-bg-color);
-}
-
-.mostPopularCardLink {
-	color: var(--main-text-color);
-	text-decoration: none;
-}
-
-.mostPopularCardLink:hover {
-	color: var(--main-text-color);
-	font-size: 1.2rem;
-	transition: 0.3s ease-out;
-}
-
 .exploreMoreBtn {
 	margin: 10px;
 	padding: 10px;

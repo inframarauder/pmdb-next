@@ -1,0 +1,36 @@
+.titleCard {
+	text-align: left;
+	height: 500px;
+}
+
+.titleCardPoster {
+	height: 350px;
+	padding: 10px;
+	object-fit: contain;
+}
+
+.titleCardTitle {
+	background-color: var(--main-bg-color);
+	color: var(--main-text-color);
+	padding: 10px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.smallInfo {
+	font-size: 0.8rem;
+}
+
+.titleCardLink {
+	color: var(--main-text-color);
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.titleCardLink:hover {
+	color: var(--main-text-color);
+	font-size: 1.5rem;
+	transition: 0.3s ease-out;
+}

@@ -37,10 +37,10 @@ const Header = () => {
 						</Offcanvas.Title>
 					</Offcanvas.Header>
 					<Offcanvas.Body>
-						<Form className="d-flex remove-focus">
+						<small>Search by title name, genre, cast, etc.</small>
+						<Form className="d-flex remove-focus my-2">
 							<FormControl
 								type="search"
-								placeholder="Search for a movie..."
 								className="me-2 remove-focus"
 								aria-label="Search"
 							/>
@@ -48,14 +48,16 @@ const Header = () => {
 						</Form>
 						<hr />
 						<Nav className="justify-content-end flex-grow-1 pe-3">
-							<Nav.Link href="/explore" className={styles.header_link}>
+							<Nav.Link href="/titles" className={styles.header_link}>
 								Explore
 							</Nav.Link>
 							<Nav.Link href="/auth" className={styles.header_link}>
 								Login
 							</Nav.Link>
+							<Nav.Link href="/titles/add" className={styles.header_link}>
+								Add a title
+							</Nav.Link>
 							<Nav.Link href="/profile" className={styles.header_link}>
-								{" "}
 								Profile
 							</Nav.Link>
 							<Nav.Link href="/watchlist" className={styles.header_link}>
