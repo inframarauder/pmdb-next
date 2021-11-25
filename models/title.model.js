@@ -1,11 +1,11 @@
-import { Schema, model } from "mongoose";
+import { Schema, model, models } from "mongoose";
 
 const titleSchema = new Schema(
 	{
 		type: {
 			type: String,
-			required: [true, "Title type is required"],
 			enum: ["movie", "series", "anime"],
+			default: "movie",
 		},
 		name: {
 			type: String,
@@ -50,7 +50,7 @@ const titleSchema = new Schema(
 		plot: {
 			type: String,
 			minlength: [10, "Plot must be atleast 10 characters long"],
-			maxlength: [500, "Plot must be atmost 500 characters long"],
+			maxlength: [1000, "Plot must be atmost 1000 characters long"],
 		},
 		reviewCount: {
 			type: Number,
@@ -60,8 +60,14 @@ const titleSchema = new Schema(
 			type: Number,
 			default: 0,
 		},
+		streamingOn: [
+			{
+				platformName: { type: String, required: true },
+				streamingLink: { type: String, required: true },
+			},
+		],
 	},
 	{ timestamps: true }
 );
 
-module.exports = model("Title", titleSchema);
+module.exports = models.Title || model("Title", titleSchema);
