@@ -1,7 +1,8 @@
 import { createTitle, getTitles } from "../../../services/title.service";
 import errorHandler from "../../../utils/errorHandler";
+import checkAuth from "../../../utils/checkAuth";
 
-export default async function handler(req, res) {
+const handler = async (req, res) => {
 	const { method } = req;
 	switch (method) {
 		case "POST":
@@ -49,4 +50,8 @@ export default async function handler(req, res) {
 		default:
 			return res.status(405).json({ message: "Method not allowed" });
 	}
+};
+
+export default function handlerWithAuth(req, res) {
+	return checkAuth(req, res, handler, { admin: true });
 }
