@@ -31,10 +31,26 @@ const Explore = ({ titles }) => {
 	);
 };
 
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
+	const mongoQuery = {};
 	const projection = ["name", "poster", "language", "year", "rating", "genres"];
 	const sort = { rating: -1 };
-	const data = await getTitles({}, projection, sort);
+	if (Object.keys(context.query).length > 0) {
+		const { rating, searchText } = context.query;
+		if (rating) {
+			mongoQuery["rating"] = { $gte: parseInt(rating) };
+		}
+		if (searchText) {
+			const regexQuery = { $regex: searchText, $options: "i" };
+			mongoQuery["$or"] = [
+				{ name: regexQuery },
+				{ language: regexQuery },
+				{ genres: regexQuery },
+			];
+		}
+	}
+
+	const data = await getTitles(mongoQuery, projection, sort);
 	const serializedData = JSON.parse(JSON.stringify(data));
 	return {
 		props: {

@@ -18,3 +18,14 @@
 	transition: 0.3s ease-in;
 	font-size: 1.2rem;
 }
+
+.searchFormCol {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: flex-start;
+}
+
+.searchFormSelect {
+	width: 150px;
+}
