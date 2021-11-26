@@ -1,12 +1,12 @@
-import { Provider as TitlesProvider } from "../contexts/TitlesContext";
+import { Provider as AuthProvider } from "../contexts/AuthContext";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
 	return (
-		<TitlesProvider>
+		<AuthProvider>
 			<Component {...pageProps} />
-		</TitlesProvider>
+		</AuthProvider>
 	);
 }
 

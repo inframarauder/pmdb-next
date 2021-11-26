@@ -1,18 +1,12 @@
-import React, { useContext, useEffect } from "react";
+import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { Layout } from "../../components/common";
 import { TitleCard } from "../../components/Titles";
-import { Context as TitlesContext } from "../../contexts/TitlesContext";
 import styles from "../../styles/Explore.module.css";
 
 import { getTitles } from "../../services/title.service";
 
 const Explore = ({ titles }) => {
-	const { setTitles } = useContext(TitlesContext);
-	useEffect(() => {
-		setTitles(titles);
-	}, [titles]);
-
 	return (
 		<Layout>
 			<Container className={styles.explore}>
