@@ -10,6 +10,7 @@ const titleSchema = new Schema(
 		name: {
 			type: String,
 			required: [true, "Title name is required"],
+			index: true,
 		},
 		poster: {
 			type: String,
@@ -26,6 +27,7 @@ const titleSchema = new Schema(
 		genres: {
 			type: String,
 			required: [true, "Title genres is required"],
+			index: true,
 		},
 		cast: {
 			type: String,
@@ -46,6 +48,7 @@ const titleSchema = new Schema(
 		language: {
 			type: String,
 			required: [true, "Title language is required"],
+			indexed: true,
 		},
 		plot: {
 			type: String,
@@ -59,6 +62,7 @@ const titleSchema = new Schema(
 		rating: {
 			type: Number,
 			default: 0,
+			index: true,
 		},
 		streamingOn: [
 			{
