@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import Link from "next/link";
 import styles from "../../styles/Home.module.css";
-import { TitleCard } from "../common";
+import { TitleCard } from "../Titles";
 
 const MostPopular = ({ mostPopular }) => {
 	return (

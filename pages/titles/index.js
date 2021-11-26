@@ -1,6 +1,7 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import { Layout, TitleCard } from "../../components/common";
+import { Layout } from "../../components/common";
+import { TitleCard } from "../../components/Titles";
 import { connectDb } from "../../utils/db";
 import Title from "../../models/title.model";
 import styles from "../../styles/Explore.module.css";
