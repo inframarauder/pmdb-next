@@ -1,10 +1,7 @@
 import bcrypt from "bcryptjs";
-import { connectDb } from "../../../utils/db";
-import User from "../../../models/user.model";
+import { getUser, createUser } from "../../../services/user.service";
 import errorHandler from "../../../utils/errorHandler";
 import { BadRequest, Unauthorized } from "../../../utils/errors";
-
-connectDb();
 
 export default async function handler(req, res) {
 	if (req.method === "POST") {
@@ -13,15 +10,15 @@ export default async function handler(req, res) {
 			if (!username || !password) {
 				throw new BadRequest("Username or password is missing");
 			}
-			let user = await User.findOne({ username }, [
-				"username",
-				"password",
-				"isAdmin",
-			]);
+
+			const query = { username };
+			const projection = ["username", "password", "isAdmin"];
+			let user = await getUser(query, projection);
+
 			if (!user) {
 				const salt = await bcrypt.genSalt(12);
 				password = await bcrypt.hash(password, salt);
-				user = await new User({ username, password }).save();
+				user = await createUser({ username, password });
 			} else {
 				const valid = await bcrypt.compare(password, user.password);
 				if (!valid) {

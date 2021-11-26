@@ -18,10 +18,6 @@ const userSchema = new Schema(
 			type: Boolean,
 			default: false,
 		},
-		contributions: {
-			type: Number,
-			default: 0,
-		},
 		reviews: {
 			type: Number,
 			default: 0,
