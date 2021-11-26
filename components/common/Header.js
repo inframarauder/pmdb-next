@@ -1,5 +1,7 @@
-import React, { useState } from "react";
-import { Navbar, Nav, Container, Offcanvas } from "react-bootstrap";
+import React, { useState, useContext } from "react";
+import { Navbar, Nav, Container, Offcanvas, Button } from "react-bootstrap";
+import { useRouter } from "next/router";
+import { Context as AuthContext } from "../../contexts/AuthContext";
 import SearchForm from "./SearchForm";
 import styles from "../../styles/Header.module.css";
 
@@ -7,6 +9,18 @@ const Header = () => {
 	const [show, setShow] = useState(false);
 	const toggleMenu = () => {
 		setShow(!show);
+	};
+
+	const { state, logout } = useContext(AuthContext);
+
+	const router = useRouter();
+
+	const handleLogout = () => {
+		if (window.confirm("Are you sure you want to logout?")) {
+			logout();
+			toggleMenu();
+			router.push("/");
+		}
 	};
 
 	return (
@@ -43,18 +57,28 @@ const Header = () => {
 							<Nav.Link href="/titles" className={styles.header_link}>
 								Explore
 							</Nav.Link>
-							<Nav.Link href="/auth" className={styles.header_link}>
-								Login
-							</Nav.Link>
-							{/* <Nav.Link href="/titles/add" className={styles.header_link}>
-								Add a title
-							</Nav.Link>
-							<Nav.Link href="/profile" className={styles.header_link}>
-								Profile
-							</Nav.Link>
-							<Nav.Link href="/watchlist" className={styles.header_link}>
-								My Watch List
-							</Nav.Link> */}
+							{state.user && !state.loading ? (
+								<>
+									<Nav.Link href="/profile" className={styles.header_link}>
+										Profile
+									</Nav.Link>
+									<Nav.Link href="/watchlist" className={styles.header_link}>
+										My Watch List
+									</Nav.Link>
+									{state.user.isAdmin && (
+										<Nav.Link href="/titles/add" className={styles.header_link}>
+											Add a title
+										</Nav.Link>
+									)}
+									<Button variant="outline-light" onClick={handleLogout}>
+										Logout
+									</Button>
+								</>
+							) : (
+								<Nav.Link href="/login" className={styles.header_link}>
+									Login
+								</Nav.Link>
+							)}
 						</Nav>
 					</Offcanvas.Body>
 				</Navbar.Offcanvas>
