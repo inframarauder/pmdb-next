@@ -35,8 +35,14 @@ const getTitles = (dispatch) => {
 	};
 };
 
+const setTitles = (dispatch) => {
+	return (titles) => {
+		dispatch({ type: "get_titles", payload: titles });
+	};
+};
+
 export const { Context, Provider } = createDataContext(
 	titlesReducer,
-	{ getTitles },
+	{ getTitles, setTitles },
 	initialState
 );
