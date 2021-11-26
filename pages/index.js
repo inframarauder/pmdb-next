@@ -2,10 +2,7 @@ import React from "react";
 import { Layout } from "../components/common";
 import { About, MostPopular } from "../components/Home";
 import styles from "../styles/Home.module.css";
-import { connectDb } from "../utils/db";
-import Title from "../models/title.model";
-
-connectDb();
+import { getTitles } from "../services/title.service";
 
 const Home = ({ mostPopular }) => {
 	return (
@@ -19,20 +16,14 @@ const Home = ({ mostPopular }) => {
 };
 
 export async function getStaticProps(context) {
-	const projections = {
-		name: 1,
-		poster: 1,
-		language: 1,
-		year: 1,
-		rating: 1,
-		genres: 1,
-	};
-	const data = await Title.find({}, projections)
-		.sort({ rating: -1 })
-		.limit(10)
-		.lean();
+	const projection = ["name", "poster", "language", "year", "rating", "genres"];
+	const sort = { rating: -1 };
+	const limit = 8;
+
+	const data = await getTitles({}, projection, sort, limit);
 
 	const serializedData = JSON.parse(JSON.stringify(data));
+
 	return {
 		props: {
 			mostPopular: serializedData,

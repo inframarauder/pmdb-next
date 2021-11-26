@@ -2,11 +2,9 @@ import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { Layout } from "../../components/common";
 import { TitleCard } from "../../components/Titles";
-import { connectDb } from "../../utils/db";
-import Title from "../../models/title.model";
 import styles from "../../styles/Explore.module.css";
 
-connectDb();
+import { getTitles } from "../../services/title.service";
 
 const Explore = ({ titles }) => {
 	return (
@@ -28,15 +26,9 @@ const Explore = ({ titles }) => {
 };
 
 export async function getStaticProps(context) {
-	const projections = {
-		name: 1,
-		poster: 1,
-		language: 1,
-		year: 1,
-		rating: 1,
-		genres: 1,
-	};
-	const data = await Title.find({}, projections).sort({ ratiing: -1 }).lean();
+	const projection = ["name", "poster", "language", "year", "rating", "genres"];
+	const sort = { rating: -1 };
+	const data = await getTitles({}, projection, sort);
 	const serializedData = JSON.parse(JSON.stringify(data));
 	return {
 		props: {

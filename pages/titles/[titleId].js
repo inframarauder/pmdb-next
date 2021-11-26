@@ -2,11 +2,9 @@ import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { Layout } from "../../components/common";
 import { StreamingData, TrailerPlayer } from "../../components/Titles";
-import { connectDb } from "../../utils/db";
-import Title from "../../models/title.model";
 import styles from "../../styles/TitleDetails.module.css";
 
-connectDb();
+import { getTitles, readTitle } from "../../services/title.service";
 
 const TitleDetails = ({ title }) => {
 	return (
@@ -76,7 +74,7 @@ const TitleDetails = ({ title }) => {
 };
 
 export async function getStaticPaths() {
-	const data = await Title.find({}, { _id: 1 }).lean();
+	const data = await getTitles({}, ["_id"]);
 	const paths = data.map((title) => ({
 		params: { titleId: title._id.toString() },
 	}));
@@ -86,7 +84,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context) {
 	const { titleId } = context.params;
-	const data = await Title.findOne({ _id: titleId }).lean();
+	const data = await readTitle({ _id: titleId });
 	const serializedData = JSON.parse(JSON.stringify(data));
 	return {
 		props: {

@@ -1,16 +1,15 @@
-import { connectDb } from "../../../utils/db";
-import Title from "../../../models/title.model";
+import { createTitle } from "../../../services/title.service";
 import errorHandler from "../../../utils/errorHandler";
-
-connectDb();
 
 export default async function handler(req, res) {
 	const { method } = req;
 	switch (method) {
 		case "POST":
 			try {
-				await new Title(req.body).save();
-				return res.status(201).json({ message: "Title added!" });
+				const title = await createTitle(req.body);
+				return res
+					.status(201)
+					.json({ message: `Title ${title.name} created!` });
 			} catch (error) {
 				errorHandler(error, req, res);
 			}
