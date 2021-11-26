@@ -28,6 +28,14 @@
 	margin-top: 5px;
 }
 
+.titleName {
+	font-size: 0.8vw;
+	font-weight: bold;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
 .smallInfo {
 	font-size: 0.8rem;
 }

@@ -33,7 +33,8 @@ const TitleCard = ({ title }) => {
 				{showDetails && (
 					<Card.Title className={styles.titleCardTitle}>
 						<div className={styles.titleLine}>
-							{title.name} <strong>{title.rating}</strong>
+							<span className={styles.titleName}>{title.name} </span>
+							<strong>{title.rating}</strong>
 						</div>
 
 						<span className={styles.smallInfo}>{title.year}</span>

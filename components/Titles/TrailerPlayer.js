@@ -15,7 +15,7 @@ const TrailerPlayer = ({ url }) => {
 					width: 640,
 					height: 360,
 				});
-			} else if (innerWidth <= 1336 && innerWidth > 480) {
+			} else if (innerWidth <= 1336 && innerWidth > 400) {
 				setPlayerDimensions({
 					width: 320,
 					height: 180,
