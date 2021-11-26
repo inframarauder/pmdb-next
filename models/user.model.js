@@ -15,7 +15,10 @@ const userSchema = new Schema(
 			type: String,
 			unique: true,
 		},
-
+		isAdmin: {
+			type: Boolean,
+			default: false,
+		},
 		contributions: {
 			type: Number,
 			default: 0,
@@ -23,6 +26,11 @@ const userSchema = new Schema(
 		reviews: {
 			type: Number,
 			default: 0,
+		},
+		watchlist: {
+			type: [Schema.Types.ObjectId],
+			ref: "Title",
+			default: [],
 		},
 	},
 	{ timestamps: true }
