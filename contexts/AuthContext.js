@@ -1,5 +1,5 @@
 import createDataContext from "./createDataContext";
-import axios from "axios";
+import api from "../utils/frontend/api";
 
 const getUserFromLocalStorage = () => {
 	if (typeof window !== "undefined") {
@@ -34,7 +34,7 @@ const authReducer = (state, action) => {
 const authenticate = (dispatch) => async (credentials, type) => {
 	dispatch({ type: "auth_loading" });
 	try {
-		const response = await axios.post(`/api/auth/${type}`, credentials);
+		const response = await api.post(`/api/auth/${type}`, credentials);
 		localStorage.setItem("token", response.data.token);
 		localStorage.setItem("user", JSON.stringify(response.data.user));
 		dispatch({ type: "auth_success", payload: response.data.user });

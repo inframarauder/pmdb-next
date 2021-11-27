@@ -1,6 +1,9 @@
-import { createTitle, getTitles } from "../../../services/title.service";
-import errorHandler from "../../../utils/errorHandler";
-import checkAuth from "../../../utils/checkAuth";
+import errorHandler from "../../../utils/backend/errorHandler";
+import checkAuth from "../../../utils/backend/checkAuth";
+import {
+	createTitle,
+	getTitles,
+} from "../../../utils/backend/services/title.service";
 
 const handler = async (req, res) => {
 	const { method } = req;

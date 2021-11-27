@@ -2,7 +2,7 @@ import React from "react";
 import { Layout } from "../components/common";
 import { About, MostPopular } from "../components/Home";
 import styles from "../styles/Home.module.css";
-import { getTitles } from "../services/title.service";
+import { getTitles } from "../utils/backend/services/title.service";
 
 const Home = ({ mostPopular }) => {
 	return (

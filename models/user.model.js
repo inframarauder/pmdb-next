@@ -36,7 +36,7 @@ userSchema.methods.generateAuthToken = function () {
 		const { JWT_SECRET } = process.env;
 		const user = this.toObject();
 		delete user.password;
-		return jwt.sign({ user }, JWT_SECRET, { expiresIn: "30d" });
+		return jwt.sign({ user }, JWT_SECRET);
 	} catch (error) {
 		console.error("Error in access token generation\n", error);
 	}

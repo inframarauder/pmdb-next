@@ -4,7 +4,10 @@ import { Layout } from "../../components/common";
 import { StreamingData, TrailerPlayer } from "../../components/Titles";
 import styles from "../../styles/TitleDetails.module.css";
 
-import { getTitles, readTitle } from "../../services/title.service";
+import {
+	getTitles,
+	readTitle,
+} from "../../utils/backend/services/title.service";
 
 const TitleDetails = ({ title }) => {
 	return (

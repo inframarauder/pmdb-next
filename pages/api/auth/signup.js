@@ -1,7 +1,10 @@
 import bcrypt from "bcryptjs";
-import { getUser, createUser } from "../../../services/user.service";
-import errorHandler from "../../../utils/errorHandler";
-import { BadRequest } from "../../../utils/errors";
+import errorHandler from "../../../utils/backend/errorHandler";
+import { BadRequest } from "../../../utils/backend/errors";
+import {
+	getUser,
+	createUser,
+} from "../../../utils/backend/services/user.service";
 
 export default async function handler(req, res) {
 	if (req.method === "POST") {

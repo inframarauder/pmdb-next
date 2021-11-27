@@ -7,11 +7,11 @@ import {
 	Alert,
 	Spinner,
 } from "react-bootstrap";
-import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { Context as AuthContext } from "../../contexts/AuthContext";
 import { Layout } from "../../components/common";
+import api from "../../utils/frontend/api";
 import styles from "../../styles/Auth.module.css";
 
 const Login = () => {
@@ -45,7 +45,7 @@ const Login = () => {
 		} else if (username.length > 12) {
 			message = "Username must be less than 12 characters long";
 		} else {
-			const res = await axios.post("/api/users/checkusername", { username });
+			const res = await api.post("/api/users/checkusername", { username });
 			if (!res.data.available) {
 				message = "Username already taken";
 			}

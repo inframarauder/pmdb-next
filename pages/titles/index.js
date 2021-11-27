@@ -3,8 +3,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import { Layout } from "../../components/common";
 import { TitleCard } from "../../components/Titles";
 import styles from "../../styles/Explore.module.css";
-
-import { getTitles } from "../../services/title.service";
+import { getTitles } from "../../utils/backend/services/title.service";
 
 const Explore = ({ titles }) => {
 	return (
