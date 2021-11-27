@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import Link from "next/link";
-import { Container, Row, Col, Popover, OverlayTrigger } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
+import { Context as AuthContext } from "../../contexts/AuthContext";
 import { Layout } from "../../components/common";
-import { StreamingData, TrailerPlayer } from "../../components/Titles";
+import {
+	StreamingData,
+	TrailerPlayer,
+	TitleDetailsOptions,
+} from "../../components/Titles";
 import styles from "../../styles/TitleDetails.module.css";
 
 import {
@@ -29,50 +34,7 @@ const TitleDetails = ({ title }) => {
 							</div>
 							<div className={styles.otherInfo}>
 								<p className={styles.rating}>{title.rating}</p>
-								<OverlayTrigger
-									trigger="click"
-									placement="bottom"
-									overlay={
-										<Popover id="popover-basic">
-											<Popover.Header as="h3">Options</Popover.Header>
-											<Popover.Body>
-												<ul className={styles.optionsList}>
-													<li className={styles.option}>
-														<Link href={`/titles/edit/${title.id}`}>
-															<a className={styles.optionLink}>
-																<i className="fa fa-edit mx-1"></i>
-																Edit
-															</a>
-														</Link>
-													</li>
-													<li className={styles.option}>
-														<Link href={`/titles/${title._id}/#reviews`}>
-															<a className={styles.optionLink}>
-																<i className="fa fa-eye mx-1"></i>
-																View Reviews
-															</a>
-														</Link>
-													</li>
-													<li className={styles.option}>
-														<Link href={`/reviews/write`}>
-															<a className={styles.optionLink}>
-																<i className="fa fa-pencil mx-1"></i>Write
-																Review
-															</a>
-														</Link>
-													</li>
-												</ul>
-											</Popover.Body>
-										</Popover>
-									}
-								>
-									<div className={styles.optionsBtn}>
-										<i
-											className="fa fa-caret-square-o-down"
-											aria-hidden="true"
-										></i>{" "}
-									</div>
-								</OverlayTrigger>
+								<TitleDetailsOptions titleId={title._id} />
 							</div>
 						</div>
 
