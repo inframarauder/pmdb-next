@@ -18,6 +18,8 @@
 }
 
 .titleSection {
+	position: sticky;
+	z-index: 5;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
@@ -45,10 +47,44 @@
 	color: var(--subtle-text-color);
 }
 
+.otherInfo {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
 .rating {
-	font-size: 1.4rem;
+	font-size: 2rem;
 	font-weight: bold;
-	padding: 5px;
+}
+
+.optionsBtn {
+	cursor: pointer;
+	font-size: 1.4rem;
+}
+
+.optionsBtn:hover {
+	font-size: 1.8rem;
+	transition: 0.3s ease-out;
+}
+
+.optionsList {
+	list-style-type: none;
+	padding: 3px;
+}
+
+.option {
+	font-size: 0.9rem;
+	cursor: pointer;
+	margin-bottom: 10px;
+	padding: 2px;
+}
+
+.optionLink {
+	color: var(--subtle-text-color);
+}
+.optionLink:hover {
+	font-size: 1rem;
+	transition: 0.3s ease-out;
 }
 
 .info {
