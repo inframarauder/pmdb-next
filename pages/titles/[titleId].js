@@ -1,7 +1,5 @@
-import React, { useContext } from "react";
-import Link from "next/link";
+import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import { Context as AuthContext } from "../../contexts/AuthContext";
 import { Layout } from "../../components/common";
 import {
 	StreamingData,
