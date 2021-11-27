@@ -50,6 +50,7 @@ const authenticate =
 
 const logout = (dispatch) => () => {
 	localStorage.removeItem("token");
+	localStorage.removeItem("user");
 	dispatch({ type: "logout" });
 };
 
