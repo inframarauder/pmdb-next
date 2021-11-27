@@ -5,6 +5,10 @@
 	justify-content: center;
 }
 
+.spinnerContainer {
+	padding: 20px;
+}
+
 .formContainer {
 	height: 100%;
 	width: 40%;

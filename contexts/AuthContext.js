@@ -35,7 +35,7 @@ const authenticate =
 			localStorage.setItem("token", response.data.token);
 			dispatch({ type: "auth_success", payload: response.data.user });
 		} catch (err) {
-			dispatch({ type: "auth_error", payload: err.message });
+			dispatch({ type: "auth_error", payload: err.response.data.error });
 		}
 	};
 

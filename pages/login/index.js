@@ -1,6 +1,15 @@
-import React, { useState } from "react";
-import { Form, Container, Button, InputGroup, Alert } from "react-bootstrap";
+import React, { useState, useContext, useEffect } from "react";
+import {
+	Form,
+	Container,
+	Button,
+	InputGroup,
+	Alert,
+	Spinner,
+} from "react-bootstrap";
 import axios from "axios";
+import { useRouter } from "next/router";
+import { Context as AuthContext } from "../../contexts/AuthContext";
 import { Layout } from "../../components/common";
 import styles from "../../styles/Login.module.css";
 
@@ -54,13 +63,27 @@ const Login = () => {
 	};
 
 	const handleChange = async (e) => {
-		if (e.target.name === "username") {
-			validateUsername(e.target.value);
-		}
-		if (e.target.name === "password") {
-			validatePassword(e.target.value);
-		}
+		// if (e.target.name === "username") {
+		// 	validateUsername(e.target.value);
+		// }
+		// if (e.target.name === "password") {
+		// 	validatePassword(e.target.value);
+		// }
 		setFormData({ ...formData, [e.target.name]: e.target.value });
+	};
+
+	const { state, authenticate } = useContext(AuthContext);
+	const router = useRouter();
+
+	useEffect(() => {
+		if (state.user) {
+			router.push("/titles");
+		}
+	}, [state.user]);
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		authenticate(formData);
 	};
 
 	return (
@@ -75,64 +98,72 @@ const Login = () => {
 						</span>
 						<hr />
 					</div>
-
-					<Form className={styles.form}>
-						<Form.Group className={styles.formField}>
-							<Form.Control
-								type="text"
-								placeholder="Username"
-								name="username"
-								value={formData.username}
-								onChange={handleChange}
-								autoComplete="off"
-								className={
-									errorMessage.username.length > 0
-										? "remove-focus " + styles.fieldError
-										: "remove-focus"
-								}
-							/>
-						</Form.Group>
-						{errorMessage.username.length > 0 && (
-							<Alert variant="danger">{errorMessage.username}</Alert>
-						)}
-
-						<Form.Group className={styles.formField}>
-							<InputGroup className="mb-3">
+					{state.loading ? (
+						<div className={styles.spinnerContainer}>
+							<Spinner animation="border" variant="light" />
+						</div>
+					) : (
+						<Form className={styles.form} onSubmit={handleSubmit}>
+							{state.error.length > 0 && (
+								<Alert variant="danger">{state.error}</Alert>
+							)}
+							<Form.Group className={styles.formField}>
 								<Form.Control
-									type={inputType}
-									placeholder="Password"
-									name="password"
-									value={formData.password}
+									type="text"
+									placeholder="Username"
+									name="username"
+									value={formData.username}
 									onChange={handleChange}
 									autoComplete="off"
 									className={
-										errorMessage.password.length > 0
+										errorMessage.username.length > 0
 											? "remove-focus " + styles.fieldError
 											: "remove-focus"
 									}
 								/>
+							</Form.Group>
+							{errorMessage.username.length > 0 && (
+								<Alert variant="danger">{errorMessage.username}</Alert>
+							)}
+
+							<Form.Group className={styles.formField}>
+								<InputGroup className="mb-3">
+									<Form.Control
+										type={inputType}
+										placeholder="Password"
+										name="password"
+										value={formData.password}
+										onChange={handleChange}
+										autoComplete="off"
+										className={
+											errorMessage.password.length > 0
+												? "remove-focus " + styles.fieldError
+												: "remove-focus"
+										}
+									/>
+									<Button
+										variant="outline-light"
+										onClick={() => togglePasswordShow()}
+										className="remove-focus"
+									>
+										<i className={icon}></i>
+									</Button>
+								</InputGroup>
+							</Form.Group>
+							{errorMessage.password.length > 0 && (
+								<Alert variant="danger">{errorMessage.password}</Alert>
+							)}
+							<Form.Group className={styles.formField}>
 								<Button
+									type="submit"
 									variant="outline-light"
-									onClick={() => togglePasswordShow()}
-									className="remove-focus"
+									className="w-100 remove-focus"
 								>
-									<i className={icon}></i>
+									Login
 								</Button>
-							</InputGroup>
-						</Form.Group>
-						{errorMessage.password.length > 0 && (
-							<Alert variant="danger">{errorMessage.password}</Alert>
-						)}
-						<Form.Group className={styles.formField}>
-							<Button
-								type="submit"
-								variant="outline-light"
-								className="w-100 remove-focus"
-							>
-								Login
-							</Button>
-						</Form.Group>
-					</Form>
+							</Form.Group>
+						</Form>
+					)}
 				</div>
 			</Container>
 		</Layout>
