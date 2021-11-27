@@ -1,5 +1,5 @@
-import { connectDb } from "../utils/db";
-import Title from "../models/title.model";
+import { connectDb } from "../db";
+import Title from "../../../models/title.model";
 
 connectDb();
 
