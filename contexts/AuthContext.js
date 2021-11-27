@@ -1,8 +1,16 @@
 import createDataContext from "./createDataContext";
 import axios from "axios";
 
+const getUserFromLocalStorage = () => {
+	if (typeof window !== "undefined") {
+		const user = localStorage.getItem("user");
+		return user ? JSON.parse(user) : null;
+	}
+	return null;
+};
+
 const initialState = {
-	user: null,
+	user: getUserFromLocalStorage(),
 	loading: false,
 	error: "",
 };
@@ -33,6 +41,7 @@ const authenticate =
 				password,
 			});
 			localStorage.setItem("token", response.data.token);
+			localStorage.setItem("user", JSON.stringify(response.data.user));
 			dispatch({ type: "auth_success", payload: response.data.user });
 		} catch (err) {
 			dispatch({ type: "auth_error", payload: err.response.data.error });
