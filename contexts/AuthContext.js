@@ -31,22 +31,17 @@ const authReducer = (state, action) => {
 	}
 };
 
-const authenticate =
-	(dispatch) =>
-	async ({ username, password }) => {
-		dispatch({ type: "auth_loading" });
-		try {
-			const response = await axios.post("/api/auth", {
-				username,
-				password,
-			});
-			localStorage.setItem("token", response.data.token);
-			localStorage.setItem("user", JSON.stringify(response.data.user));
-			dispatch({ type: "auth_success", payload: response.data.user });
-		} catch (err) {
-			dispatch({ type: "auth_error", payload: err.response.data.error });
-		}
-	};
+const authenticate = (dispatch) => async (credentials, type) => {
+	dispatch({ type: "auth_loading" });
+	try {
+		const response = await axios.post(`/api/auth/${type}`, credentials);
+		localStorage.setItem("token", response.data.token);
+		localStorage.setItem("user", JSON.stringify(response.data.user));
+		dispatch({ type: "auth_success", payload: response.data.user });
+	} catch (err) {
+		dispatch({ type: "auth_error", payload: err.response.data.error });
+	}
+};
 
 const logout = (dispatch) => () => {
 	localStorage.removeItem("token");

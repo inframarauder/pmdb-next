@@ -75,9 +75,14 @@ const Header = () => {
 									</Button>
 								</>
 							) : (
-								<Nav.Link href="/login" className={styles.header_link}>
-									Login
-								</Nav.Link>
+								<>
+									<Nav.Link href="/signup" className={styles.header_link}>
+										Signup
+									</Nav.Link>
+									<Nav.Link href="/login" className={styles.header_link}>
+										Login
+									</Nav.Link>
+								</>
 							)}
 						</Nav>
 					</Offcanvas.Body>

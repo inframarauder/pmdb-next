@@ -7,13 +7,14 @@ import {
 	Alert,
 	Spinner,
 } from "react-bootstrap";
+import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { Context as AuthContext } from "../../contexts/AuthContext";
 import { Layout } from "../../components/common";
 import styles from "../../styles/Auth.module.css";
 
-const Signup = () => {
+const Login = () => {
 	const [inputType, setInputType] = useState("password");
 	const [icon, setIcon] = useState("fa fa-eye-slash");
 
@@ -32,7 +33,43 @@ const Signup = () => {
 		password: "",
 	});
 
+	const [errorMessage, setErrorMessage] = useState({
+		username: "",
+		password: "",
+	});
+
+	const validateUsername = async (username) => {
+		let message = "";
+		if (username.length <= 3) {
+			message = "Username must be at least 3 characters long";
+		} else if (username.length > 12) {
+			message = "Username must be less than 12 characters long";
+		} else {
+			const res = await axios.post("/api/users/checkusername", { username });
+			if (!res.data.available) {
+				message = "Username already taken";
+			}
+		}
+		setErrorMessage({ ...errorMessage, username: message });
+	};
+
+	const validatePassword = (password) => {
+		let message = "";
+		if (password.length <= 6) {
+			message = "Password must be at least 6 characters long";
+		} else if (password.length > 12) {
+			message = "Password must be less than 12 characters long";
+		}
+		setErrorMessage({ ...errorMessage, password: message });
+	};
+
 	const handleChange = async (e) => {
+		if (e.target.name === "username") {
+			validateUsername(e.target.value);
+		}
+		if (e.target.name === "password") {
+			validatePassword(e.target.value);
+		}
 		setFormData({ ...formData, [e.target.name]: e.target.value });
 	};
 
@@ -47,7 +84,9 @@ const Signup = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		authenticate(formData, "login");
+		if (errorMessage.username === "" && errorMessage.password === "") {
+			authenticate(formData, "signup");
+		}
 	};
 
 	return (
@@ -55,7 +94,12 @@ const Signup = () => {
 			<Container fluid className={styles.loginContainer}>
 				<div className={styles.formContainer}>
 					<div className={styles.loginCaption}>
-						Login to PMDb Next!
+						Signup for PMDb Next!
+						<br />
+						<span className={styles.infoText}>
+							Create an account to review your favorite movies and create your
+							own watchlist.
+						</span>
 						<hr />
 					</div>
 					{state.loading ? (
@@ -75,8 +119,17 @@ const Signup = () => {
 									value={formData.username}
 									onChange={handleChange}
 									autoComplete="off"
+									className={
+										errorMessage.username.length > 0
+											? "remove-focus " + styles.fieldError
+											: "remove-focus"
+									}
 								/>
 							</Form.Group>
+							{errorMessage.username.length > 0 && (
+								<Alert variant="danger">{errorMessage.username}</Alert>
+							)}
+
 							<Form.Group className={styles.formField}>
 								<InputGroup className="mb-3">
 									<Form.Control
@@ -86,6 +139,11 @@ const Signup = () => {
 										value={formData.password}
 										onChange={handleChange}
 										autoComplete="off"
+										className={
+											errorMessage.password.length > 0
+												? "remove-focus " + styles.fieldError
+												: "remove-focus"
+										}
 									/>
 									<Button
 										variant="outline-light"
@@ -96,21 +154,24 @@ const Signup = () => {
 									</Button>
 								</InputGroup>
 							</Form.Group>
+							{errorMessage.password.length > 0 && (
+								<Alert variant="danger">{errorMessage.password}</Alert>
+							)}
 							<Form.Group className={styles.formField}>
 								<Button
 									type="submit"
 									variant="outline-light"
 									className="w-100 remove-focus"
 								>
-									Login
+									Signup
 								</Button>
 							</Form.Group>
 							<div className="text-center p-3">
-								Don't have an account?
+								Already have an account?
 								<br />
-								<Link href="/signup">
+								<Link href="/login">
 									<Button size="sm" variant="outline-light" className="my-2">
-										Signup Here!
+										Login Here!
 									</Button>
 								</Link>
 							</div>
@@ -122,4 +183,4 @@ const Signup = () => {
 	);
 };
 
-export default Signup;
+export default Login;
