@@ -1,6 +1,6 @@
 import bcrypt from "bcryptjs";
 import { getUser } from "../../../utils/backend/services/user.service";
-import errorHandler from "../../../utils/errorHandler";
+import errorHandler from "../../../utils/backend/errorHandler";
 import {
 	BadRequest,
 	NotFound,

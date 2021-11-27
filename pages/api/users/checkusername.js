@@ -1,5 +1,5 @@
-import { getUser } from "../../../services/user.service";
-import errorHandler from "../../../utils/errorHandler";
+import { getUser } from "../../../utils/backend/services/user.service";
+import errorHandler from "../../../utils/backend/errorHandler";
 
 export default async function handler(req, res) {
 	if (req.method === "POST") {

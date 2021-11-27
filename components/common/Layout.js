@@ -1,9 +1,21 @@
-import React from "react";
+import React, { useEffect, useContext } from "react";
+import { useRouter } from "next/router";
 import Head from "next/head";
 import Header from "./Header";
 import Footer from "./Footer";
+import { Context as AuthContext } from "../../contexts/AuthContext";
 
-const Layout = ({ children }) => {
+const Layout = ({ privatePage, admin, children }) => {
+	const { state } = useContext(AuthContext);
+	const router = useRouter();
+
+	useEffect(() => {
+		const { user } = state;
+		if ((privatePage && !user) || (admin && !user?.isAdmin)) {
+			router.push("/login");
+		}
+	}, []);
+
 	return (
 		<>
 			<Head>
