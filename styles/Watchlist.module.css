@@ -1,0 +1,29 @@
+.watchlistContainer {
+	min-height: 100vh;
+	padding: 10px;
+}
+
+.loading {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.empty {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	font-size: 1.5rem;
+	color: #ccc;
+}
+
+.link {
+	color: var(--secondary-color);
+	text-decoration: none;
+}
+
+.link:hover {
+	cursor: pointer;
+	font-size: 1.6rem;
+}
