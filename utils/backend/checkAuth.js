@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import errorHandler from "../errorHandler";
+import errorHandler from "../backend/errorHandler";
 import { Unauthorized, Forbidden } from "./errors";
 
 export default function (req, res, handler, options = { admin: false }) {

@@ -1,5 +1,5 @@
-import React, { useContext, useEffect } from "react";
-import { Popover, OverlayTrigger, Button } from "react-bootstrap";
+import React, { useContext, useEffect, useState } from "react";
+import { Popover, OverlayTrigger, Button, Spinner } from "react-bootstrap";
 import Link from "next/link";
 import api from "../../utils/frontend/api";
 import { Context as AuthContext } from "../../contexts/AuthContext";
@@ -7,8 +7,39 @@ import styles from "../../styles/TitleDetails.module.css";
 
 const TitleDetailsOptions = ({ titleId }) => {
 	const { state } = useContext(AuthContext);
+	const [inWatchlist, setInWatchlist] = useState(false);
+	const [loading, setLoading] = useState(false);
 
-	const toggleWatchlist = async () => {};
+	useEffect(() => {
+		const checkWatchlist = async () => {
+			setLoading(true);
+			const res = await api.get(`/api/users/checkwatchlist`, {
+				params: { titleId },
+			});
+			const { inWatchlist } = res.data;
+			setInWatchlist(inWatchlist);
+			setLoading(false);
+		};
+		checkWatchlist();
+	}, [inWatchlist, titleId]);
+
+	const toggleWatchlist = async () => {
+		setLoading(true);
+		let res;
+		if (inWatchlist) {
+			res = await api.put(`/api/users/watchlist`, {
+				titleId,
+				operation: "remove",
+			});
+		} else {
+			res = await api.put(`/api/users/watchlist`, {
+				titleId,
+				operation: "add",
+			});
+		}
+		setInWatchlist(res.data.inWatchlist);
+		setLoading(false);
+	};
 
 	return state.user ? (
 		<OverlayTrigger
@@ -47,9 +78,31 @@ const TitleDetailsOptions = ({ titleId }) => {
 							</li>
 							<hr />
 							<li className={styles.option}>
-								<Button size="sm" variant="success" onClick={toggleWatchlist}>
-									<i className="fa fa-plus mx-1"></i>Watchlist
-								</Button>
+								{loading ? (
+									<div className="text-center">
+										<Spinner animation="border" variant="primary" />
+									</div>
+								) : (
+									<>
+										{inWatchlist ? (
+											<Button
+												size="sm"
+												variant="secondary"
+												onClick={toggleWatchlist}
+											>
+												<i className="fa fa-check mx-1"></i>Watchlist
+											</Button>
+										) : (
+											<Button
+												size="sm"
+												variant="success"
+												onClick={toggleWatchlist}
+											>
+												<i className="fa fa-plus mx-1"></i>Watchlist
+											</Button>
+										)}
+									</>
+								)}
 							</li>
 						</ul>
 					</Popover.Body>

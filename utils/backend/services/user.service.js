@@ -34,6 +34,7 @@ export const getUserWatchlist = (userId) => {
 				path: "watchlist",
 				select: ["name", "poster", "rating", "genres", "year", "language"],
 			})
+			.lean()
 			.then((user) => {
 				resolve(user.watchlist);
 			})
@@ -45,13 +46,21 @@ export const getUserWatchlist = (userId) => {
 
 export const addToWatchlist = (userId, titleId) => {
 	return new Promise((resolve, reject) => {
-		User.findByIdAndUpdateId(
-			userId,
-			{ $push: { watchlist: titleId } },
-			{ runValidators: true }
-		)
-			.then(() => {
-				resolve();
+		User.findById(userId)
+			.then((user) => {
+				if (user.watchlist.includes(titleId)) {
+					resolve("Already in watchlist");
+				} else {
+					user.watchlist.push(titleId);
+					user
+						.save()
+						.then(() => {
+							resolve("Added to watchlist");
+						})
+						.catch((err) => {
+							reject(err);
+						});
+				}
 			})
 			.catch((err) => {
 				reject(err);
@@ -61,13 +70,13 @@ export const addToWatchlist = (userId, titleId) => {
 
 export const removeFromWatchlist = (userId, titleId) => {
 	return new Promise((resolve, reject) => {
-		User.findByIdAndUpdateId(
+		User.findByIdAndUpdate(
 			userId,
 			{ $pull: { watchlist: titleId } },
 			{ runValidators: true }
 		)
 			.then(() => {
-				resolve();
+				resolve("Removed from watchlist!");
 			})
 			.catch((err) => {
 				reject(err);

@@ -1,6 +1,7 @@
 import {
 	getUserWatchlist,
 	addToWatchlist,
+	removeFromWatchlist,
 } from "../../../utils/backend/services/user.service";
 import errorHandler from "../../../utils/backend/errorHandler";
 import checkAuth from "../../../utils/backend/checkAuth";
@@ -20,25 +21,23 @@ const handler = async (req, res) => {
 			break;
 		case "PUT":
 			try {
-				const { titleId } = req.body;
-				if (!titleId) {
-					throw new BadRequest("Missing titleId");
+				const { titleId, operation } = req.body;
+				if (!titleId || !operation) {
+					throw new BadRequest("Missing titleId or operation");
 				}
-				await addToWatchlist(req.user._id, titleId);
+				if (operation === "add") {
+					await addToWatchlist(req.user._id, titleId);
+					return res.status(200).json({ inWatchlist: true });
+				} else if (operation === "remove") {
+					await removeFromWatchlist(req.user._id, titleId);
+					return res.status(200).json({ inWatchlist: false });
+				} else {
+					throw new BadRequest("Invalid operation");
+				}
 			} catch (error) {
 				errorHandler(error, req, res);
 			}
 			break;
-		case "DELETE":
-			try {
-				const { titleId } = req.body;
-				if (!titleId) {
-					throw new BadRequest("Missing titleId");
-				}
-				await removeFromWatchlist(req.user._id, titleId);
-			} catch (error) {
-				errorHandler(error, req, res);
-			}
 		default:
 			return res.status(405).json({ message: "Method not allowed" });
 	}
