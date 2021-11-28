@@ -106,7 +106,7 @@ const Signup = () => {
 								</Button>
 							</Form.Group>
 							<div className="text-center p-3">
-								Don't have an account?
+								{"Don't have an account?"}
 								<br />
 								<Link href="/signup">
 									<Button size="sm" variant="outline-light" className="my-2">
