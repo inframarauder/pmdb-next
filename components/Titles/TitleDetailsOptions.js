@@ -8,19 +8,23 @@ import styles from "../../styles/TitleDetails.module.css";
 const TitleDetailsOptions = ({ titleId }) => {
 	const { state } = useContext(AuthContext);
 	const [inWatchlist, setInWatchlist] = useState(false);
+	const [alreadyReviewed, setAlreadyReviewed] = useState(false);
 	const [loading, setLoading] = useState(false);
 
 	useEffect(() => {
-		const checkWatchlist = async () => {
+		const initialChecks = async () => {
 			setLoading(true);
-			const res = await api.get(`/api/users/checkwatchlist`, {
+			const watchlistRes = await api.get(`/api/users/checkwatchlist`, {
 				params: { titleId },
 			});
-			const { inWatchlist } = res.data;
-			setInWatchlist(inWatchlist);
+			const reviewRes = await api.get(`/api/users/checkreview`, {
+				params: { titleId },
+			});
+			setInWatchlist(watchlistRes.data.inWatchlist);
+			setAlreadyReviewed(reviewRes.data.alreadyReviewed);
 			setLoading(false);
 		};
-		checkWatchlist();
+		initialChecks();
 	}, [inWatchlist, titleId]);
 
 	const toggleWatchlist = async () => {
@@ -69,13 +73,20 @@ const TitleDetailsOptions = ({ titleId }) => {
 									</a>
 								</Link>
 							</li>
-							<li className={styles.option}>
-								<Link href={`/reviews/write/${titleId}`}>
-									<a className={styles.optionLink}>
-										<i className="fa fa-pencil mx-1"></i>Write Review
-									</a>
-								</Link>
-							</li>
+							{alreadyReviewed ? (
+								<li className={styles.option}>
+									<i className="fa fa-check mx-1"></i>Already reviewed
+								</li>
+							) : (
+								<li className={styles.option}>
+									<Link href={`/reviews/write/${titleId}`}>
+										<a className={styles.optionLink}>
+											<i className="fa fa-pencil mx-1"></i>Write Review
+										</a>
+									</Link>
+								</li>
+							)}
+
 							<hr />
 							<li className={styles.option}>
 								{loading ? (
