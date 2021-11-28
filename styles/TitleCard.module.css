@@ -2,6 +2,7 @@
 	text-align: center;
 	background-color: var(--main-bg-color);
 	color: var(--main-text-color);
+	border-radius: 0;
 }
 
 .titleCard:hover {
@@ -38,6 +39,21 @@
 
 .smallInfo {
 	font-size: 0.8rem;
+}
+
+.deleteBtnContainer {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	background-color: var(--main-bg-color);
+}
+
+.deleteBtn {
+	width: 50px;
+}
+.deleteBtn:focus {
+	outline: none;
+	box-shadow: none;
 }
 
 @media only screen and (max-width: 600px) {

@@ -18,6 +18,12 @@ const Watchlist = () => {
 		};
 		getWatchlist();
 	}, []);
+	const removeFromWatchlist = async (titleId) => {
+		setLoading(true);
+		await api.put(`/api/users/watchlist`, { titleId, operation: "remove" });
+		setWatchlist(watchlist.filter((title) => title._id !== titleId));
+		setLoading(false);
+	};
 	return (
 		<Layout privatePage={true}>
 			<Container className={styles.watchlistContainer}>
@@ -32,8 +38,12 @@ const Watchlist = () => {
 						{watchlist.length > 0 ? (
 							<Row>
 								{watchlist.map((title) => (
-									<Col key={title._id} xs={6}>
-										<TitleCard title={title} />
+									<Col key={title._id} xs={6} md={4}>
+										<TitleCard
+											title={title}
+											deleteBtn={true}
+											deleteFn={removeFromWatchlist}
+										/>
 									</Col>
 								))}
 							</Row>
