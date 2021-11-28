@@ -4,7 +4,7 @@ import styles from "../../styles/TitleDetails.module.css";
 
 const ReviewCard = ({ review }) => {
 	return (
-		<Card className="mb-3" className={styles.reviewCard}>
+		<Card className={`mb-3 ${styles.reviewCard}`}>
 			<Card.Header>
 				<div className={styles.reviewHeader}>
 					<div className={styles.reviewHeaderLeft}>
