@@ -1,0 +1,42 @@
+.writeReview {
+	min-height: 100vh;
+}
+.reviewFormContainer {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.reviewForm {
+	background-color: var(--main-bg-color);
+	color: var(--main-text-color);
+	width: 55%;
+	padding: 15px;
+	margin-top: 50px;
+	margin-bottom: 50px;
+	border-radius: 20px;
+}
+
+.formGroup {
+	padding: 10px;
+	margin: 10px;
+}
+
+.formField {
+	width: 100%;
+}
+
+.formField:focus {
+	outline: none;
+}
+
+.submitButton {
+	margin: 10px;
+}
+
+@media only screen and (max-width: 600px) {
+	.reviewForm {
+		width: 100%;
+	}
+}
