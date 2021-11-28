@@ -5,6 +5,7 @@ import {
 	StreamingData,
 	TrailerPlayer,
 	TitleDetailsOptions,
+	ReviewCard,
 } from "../../components/Titles";
 import styles from "../../styles/TitleDetails.module.css";
 
@@ -12,8 +13,9 @@ import {
 	getTitles,
 	readTitle,
 } from "../../utils/backend/services/title.service";
+import { getReviews } from "../../utils/backend/services/review.service";
 
-const TitleDetails = ({ title }) => {
+const TitleDetails = ({ title, reviews }) => {
 	return (
 		<Layout>
 			<Container fluid className={styles.titleDetailsContainer}>
@@ -77,8 +79,15 @@ const TitleDetails = ({ title }) => {
 						{title.writtenBy}
 					</p>
 				</Container>
-				<Container className={styles.reviews}></Container>
 			</Container>
+			<div id="reviews" className={styles.reviewsContainer}>
+				<legend className="text-center">Reviews</legend> <hr />
+				<Container className={styles.reviews}>
+					{reviews.map((review) => (
+						<ReviewCard key={review._id} review={review} />
+					))}
+				</Container>
+			</div>
 		</Layout>
 	);
 };
@@ -94,11 +103,13 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context) {
 	const { titleId } = context.params;
-	const data = await readTitle({ _id: titleId });
-	const serializedData = JSON.parse(JSON.stringify(data));
+	const title = await readTitle({ _id: titleId });
+	const reviews = await getReviews(title._id);
+	const serializedData = JSON.parse(JSON.stringify({ title, reviews }));
 	return {
 		props: {
-			title: serializedData,
+			title: serializedData.title,
+			reviews: serializedData.reviews,
 		},
 	};
 }

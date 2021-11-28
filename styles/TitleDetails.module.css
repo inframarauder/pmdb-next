@@ -96,3 +96,58 @@
 	padding: 2px;
 	margin: 5px;
 }
+
+.reviewsContainer {
+	min-height: 100vh;
+}
+
+.reviews {
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.reviewCard {
+	width: 70%;
+	background-color: var(--main-bg-color);
+	color: var(--main-text-color);
+}
+
+.reviewHeader {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px;
+}
+
+.reviewHeaderLeft {
+	padding: 5px;
+	font-size: 1.4rem;
+}
+.reviewHeaderRight {
+	padding: 5px;
+	font-size: 2rem;
+	text-align: center;
+}
+
+.reviewUsername {
+	color: rgb(221, 216, 216);
+	font-weight: bold;
+	padding: 2px;
+	margin: 2;
+}
+
+.reviewDate {
+	font-weight: 100;
+	font-size: 0.8rem;
+	margin: 2px;
+	padding: 2px;
+}
+
+@media only screen and (max-width: 500px) {
+	.reviewCard {
+		width: 100%;
+	}
+}
