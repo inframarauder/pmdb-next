@@ -43,7 +43,7 @@ reviewSchema.post("save", async function (doc) {
 	await title.save();
 
 	//update user's review count
-	await User.findByIdAndUpdate(doc.user, { $inc: { reviews: 1 } });
+	await User.findByIdAndUpdate(doc.user, { $push: { reviews: doc._id } });
 });
 
 module.exports = models.Review || model("Review", reviewSchema);
