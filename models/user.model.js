@@ -18,10 +18,9 @@ const userSchema = new Schema(
 			type: Boolean,
 			default: false,
 		},
-		reviews: {
+		reviewedTitles: {
 			type: [Schema.Types.ObjectId],
 			default: [],
-			ref: "Review",
 		},
 		watchlist: {
 			type: [Schema.Types.ObjectId],
