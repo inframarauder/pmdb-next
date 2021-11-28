@@ -29,6 +29,7 @@ const reviewSchema = new Schema(
 		description: {
 			type: String,
 			minlength: [10, "Review must be atleast 10 characters"],
+			maxlength: [1000, "Review must be atmost 1000 characters"],
 		},
 	},
 	{ timestamps: true }
