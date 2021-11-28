@@ -15,3 +15,17 @@ export const createReview = (review) => {
 			});
 	});
 };
+
+export const getReviews = (titleId) => {
+	return new Promise((resolve, reject) => {
+		Review.find({ title: titleId })
+			.populate({ path: "user", select: ["username"] })
+			.sort({ rating: -1 })
+			.then((reviews) => {
+				resolve(reviews);
+			})
+			.catch((err) => {
+				reject(err);
+			});
+	});
+};
