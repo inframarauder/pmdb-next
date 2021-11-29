@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Popover, OverlayTrigger, Button, Spinner } from "react-bootstrap";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import api from "../../utils/frontend/api";
 import { Context as AuthContext } from "../../contexts/AuthContext";
 import styles from "../../styles/TitleDetails.module.css";
@@ -10,6 +11,7 @@ const TitleDetailsOptions = ({ titleId }) => {
 	const [inWatchlist, setInWatchlist] = useState(false);
 	const [alreadyReviewed, setAlreadyReviewed] = useState(false);
 	const [loading, setLoading] = useState(false);
+	const router = useRouter();
 
 	useEffect(() => {
 		const initialChecks = async () => {
@@ -50,6 +52,13 @@ const TitleDetailsOptions = ({ titleId }) => {
 		setLoading(false);
 	};
 
+	const deleteTitle = async () => {
+		if (window.confirm("Are you sure you want to delete this title?")) {
+			await api.delete(`/api/titles/${titleId}`);
+			router.push("/titles");
+		}
+	};
+
 	return state.user ? (
 		<OverlayTrigger
 			trigger="click"
@@ -61,7 +70,10 @@ const TitleDetailsOptions = ({ titleId }) => {
 						<ul className={styles.optionsList}>
 							{state.user.isAdmin && (
 								<li className={styles.option}>
-									<a className={styles.optionLink}>
+									<a
+										className={styles.optionLink}
+										onClick={() => deleteTitle()}
+									>
 										<i className="fa fa-trash mx-1"></i>
 										Delete
 									</a>
