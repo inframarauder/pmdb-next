@@ -3,6 +3,7 @@ import checkAuth from "../../../utils/backend/checkAuth";
 import {
 	createTitle,
 	getTitles,
+	deleteTitle,
 } from "../../../utils/backend/services/title.service";
 
 const handler = async (req, res) => {
@@ -50,6 +51,16 @@ const handler = async (req, res) => {
 			} catch (error) {
 				errorHandler(error, req, res);
 			}
+		case "DELETE":
+			try {
+				const { titleId } = req.body;
+				await deleteTitle({ _id: titleId });
+				return res.status(200).json({ message: "Title deleted!" });
+			} catch (error) {
+				errorHandler(error, req, res);
+			}
+
+			break;
 		default:
 			return res.status(405).json({ message: "Method not allowed" });
 	}

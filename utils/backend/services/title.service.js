@@ -44,3 +44,12 @@ export const readTitle = (query, projection = []) => {
 		});
 	});
 };
+
+export const deleteTitle = (query) => {
+	return new Promise((resolve, reject) => {
+		Title.deleteOne(query, (err) => {
+			if (err) reject(err);
+			resolve();
+		});
+	});
+};
