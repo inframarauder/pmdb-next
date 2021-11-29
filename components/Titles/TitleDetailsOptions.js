@@ -14,14 +14,19 @@ const TitleDetailsOptions = ({ titleId }) => {
 	useEffect(() => {
 		const initialChecks = async () => {
 			setLoading(true);
-			const watchlistRes = await api.get(`/api/users/checkwatchlist`, {
-				params: { titleId },
-			});
-			const reviewRes = await api.get(`/api/users/checkreview`, {
-				params: { titleId },
-			});
-			setInWatchlist(watchlistRes.data.inWatchlist);
-			setAlreadyReviewed(reviewRes.data.alreadyReviewed);
+			try {
+				const watchlistRes = await api.get(`/api/users/checkwatchlist`, {
+					params: { titleId },
+				});
+				const reviewRes = await api.get(`/api/users/checkreview`, {
+					params: { titleId },
+				});
+				setInWatchlist(watchlistRes.data.inWatchlist);
+				setAlreadyReviewed(reviewRes.data.alreadyReviewed);
+			} catch (error) {
+				console.error(error);
+			}
+
 			setLoading(false);
 		};
 		initialChecks();
