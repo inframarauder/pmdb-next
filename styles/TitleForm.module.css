@@ -1,0 +1,17 @@
+.titleFormContainer {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.titleForm {
+	width: 100%;
+	max-width: 800px;
+	background-color: var(--main-bg-color);
+	color: var(--main-text-color);
+	border-radius: 15px;
+	padding: 20px;
+	margin-bottom: 50px;
+}

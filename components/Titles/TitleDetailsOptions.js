@@ -61,12 +61,10 @@ const TitleDetailsOptions = ({ titleId }) => {
 						<ul className={styles.optionsList}>
 							{state.user.isAdmin && (
 								<li className={styles.option}>
-									<Link href={`/titles/edit/${titleId}`}>
-										<a className={styles.optionLink}>
-											<i className="fa fa-edit mx-1"></i>
-											Edit
-										</a>
-									</Link>
+									<a className={styles.optionLink}>
+										<i className="fa fa-trash mx-1"></i>
+										Delete
+									</a>
 								</li>
 							)}
 
