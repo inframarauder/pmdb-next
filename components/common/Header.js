@@ -60,9 +60,6 @@ const Header = () => {
 							</Nav.Link>
 							{state.user && !state.loading ? (
 								<>
-									<Nav.Link href="/profile" className={styles.header_link}>
-										Profile
-									</Nav.Link>
 									<Nav.Link href="/watchlist" className={styles.header_link}>
 										My Watch List
 									</Nav.Link>
