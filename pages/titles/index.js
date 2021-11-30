@@ -26,11 +26,11 @@ const Explore = ({ titles }) => {
 						)
 					)}
 				</Row>
-				{endIndex < titles.length - 1 && (
+				{endIndex < titles.length && (
 					<div className="text-center my-4">
 						<Button
 							variant="outline-primary"
-							onClick={() => setEndIndex(endIndex + 11)}
+							onClick={() => setEndIndex(endIndex + 12)}
 							size="lg"
 						>
 							Show more ...
