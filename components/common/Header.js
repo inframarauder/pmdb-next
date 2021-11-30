@@ -31,7 +31,9 @@ const Header = () => {
 			sticky="top"
 		>
 			<Container fluid>
-				<Navbar.Brand href="/">PMDb Next!</Navbar.Brand>
+				<Navbar.Brand href="/">
+					<img src="/images/logo.jpg" alt="logo" />
+				</Navbar.Brand>
 				<Navbar.Toggle
 					aria-controls="offcanvasNavbar"
 					className="remove-focus"
@@ -46,9 +48,8 @@ const Header = () => {
 					onHide={toggleMenu}
 				>
 					<Offcanvas.Header closeButton closeVariant="white">
-						<Offcanvas.Title id="offcanvasNavbarLabel">
-							PMDb Next!
-						</Offcanvas.Title>
+						<img src="/images/logo.jpg" alt="logo" />
+						<Offcanvas.Title id="offcanvasNavbarLabel"></Offcanvas.Title>
 					</Offcanvas.Header>
 					<Offcanvas.Body>
 						<SearchForm toggleMenu={toggleMenu} />
