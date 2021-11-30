@@ -1,5 +1,6 @@
 .titleDetailsContainer {
-	min-height: 100vh;
+	box-shadow: 0 0 20px var(--main-bg-color);
+	padding: 20px;
 }
 
 .titleDetails {
@@ -97,10 +98,6 @@
 	margin: 5px;
 }
 
-.reviewsContainer {
-	min-height: 100vh;
-}
-
 .reviews {
 	padding: 20px;
 	display: flex;
@@ -112,6 +109,7 @@
 	width: 70%;
 	background-color: var(--main-bg-color);
 	color: var(--main-text-color);
+	box-shadow: 0 0 20px var(--main-bg-color);
 }
 
 .reviewHeader {

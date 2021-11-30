@@ -59,7 +59,7 @@ const TitleDetailsOptions = ({ titleId }) => {
 		}
 	};
 
-	return state.user ? (
+	return (
 		<OverlayTrigger
 			trigger="click"
 			placement="bottom"
@@ -68,18 +68,6 @@ const TitleDetailsOptions = ({ titleId }) => {
 					<Popover.Header as="h3">Options</Popover.Header>
 					<Popover.Body>
 						<ul className={styles.optionsList}>
-							{state.user.isAdmin && (
-								<li className={styles.option}>
-									<a
-										className={styles.optionLink}
-										onClick={() => deleteTitle()}
-									>
-										<i className="fa fa-trash mx-1"></i>
-										Delete
-									</a>
-								</li>
-							)}
-
 							<li className={styles.option}>
 								<Link href={`/titles/${titleId}/#reviews`}>
 									<a className={styles.optionLink}>
@@ -88,48 +76,64 @@ const TitleDetailsOptions = ({ titleId }) => {
 									</a>
 								</Link>
 							</li>
-							{alreadyReviewed ? (
-								<li className={styles.option}>
-									<i className="fa fa-check mx-1"></i>Already reviewed
-								</li>
-							) : (
-								<li className={styles.option}>
-									<Link href={`/reviews/write/${titleId}`}>
-										<a className={styles.optionLink}>
-											<i className="fa fa-pencil mx-1"></i>Write Review
-										</a>
-									</Link>
-								</li>
-							)}
+							{state.user && (
+								<>
+									{state.user.isAdmin && (
+										<li className={styles.option}>
+											<a
+												className={styles.optionLink}
+												onClick={() => deleteTitle()}
+											>
+												<i className="fa fa-trash mx-1"></i>
+												Delete
+											</a>
+										</li>
+									)}
 
-							<hr />
-							<li className={styles.option}>
-								{loading ? (
-									<div className="text-center">
-										<Spinner animation="border" variant="primary" />
-									</div>
-								) : (
-									<>
-										{inWatchlist ? (
-											<Button
-												size="sm"
-												variant="secondary"
-												onClick={toggleWatchlist}
-											>
-												<i className="fa fa-check mx-1"></i>Watchlist
-											</Button>
+									{alreadyReviewed ? (
+										<li className={styles.option}>
+											<i className="fa fa-check mx-1"></i>Already reviewed
+										</li>
+									) : (
+										<li className={styles.option}>
+											<Link href={`/reviews/write/${titleId}`}>
+												<a className={styles.optionLink}>
+													<i className="fa fa-pencil mx-1"></i>Write Review
+												</a>
+											</Link>
+										</li>
+									)}
+
+									<hr />
+									<li className={styles.option}>
+										{loading ? (
+											<div className="text-center">
+												<Spinner animation="border" variant="primary" />
+											</div>
 										) : (
-											<Button
-												size="sm"
-												variant="success"
-												onClick={toggleWatchlist}
-											>
-												<i className="fa fa-plus mx-1"></i>Watchlist
-											</Button>
+											<>
+												{inWatchlist ? (
+													<Button
+														size="sm"
+														variant="secondary"
+														onClick={toggleWatchlist}
+													>
+														<i className="fa fa-check mx-1"></i>Watchlist
+													</Button>
+												) : (
+													<Button
+														size="sm"
+														variant="success"
+														onClick={toggleWatchlist}
+													>
+														<i className="fa fa-plus mx-1"></i>Watchlist
+													</Button>
+												)}
+											</>
 										)}
-									</>
-								)}
-							</li>
+									</li>
+								</>
+							)}
 						</ul>
 					</Popover.Body>
 				</Popover>
@@ -139,8 +143,6 @@ const TitleDetailsOptions = ({ titleId }) => {
 				<i className="fa fa-caret-square-o-down" aria-hidden="true"></i>{" "}
 			</div>
 		</OverlayTrigger>
-	) : (
-		<></>
 	);
 };
 

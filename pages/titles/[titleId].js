@@ -80,12 +80,19 @@ const TitleDetails = ({ title, reviews }) => {
 					</p>
 				</Container>
 			</Container>
-			<div id="reviews" className={styles.reviewsContainer}>
-				<legend className="text-center">Reviews</legend> <hr />
+			<div id="reviews">
+				<legend className="text-center my-4">Reviews</legend> <hr />
 				<Container className={styles.reviews}>
-					{reviews.map((review) => (
-						<ReviewCard key={review._id} review={review} />
-					))}
+					{reviews.length > 0 ? (
+						<>
+							<p className="text-center">{reviews.length} review(s) found...</p>
+							{reviews.map((review) => (
+								<ReviewCard review={review} key={review._id} />
+							))}
+						</>
+					) : (
+						<p className="text-center">No reviews yet.</p>
+					)}
 				</Container>
 			</div>
 		</Layout>

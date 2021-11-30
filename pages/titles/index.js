@@ -1,19 +1,20 @@
 import React, { useState } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap";
 import { Layout } from "../../components/common";
 import { TitleCard } from "../../components/Titles";
 import styles from "../../styles/Explore.module.css";
 import { getTitles } from "../../utils/backend/services/title.service";
 
 const Explore = ({ titles }) => {
-	const [endIndex, setEndIndex] = useState(10);
+	const [endIndex, setEndIndex] = useState(12);
 
 	return (
 		<Layout>
+			<legend className="my-4 p-2 text-center">
+				Explore these {titles.length} amazing titles on PMDb Next....
+			</legend>
+			<hr />
 			<Container className={styles.explore}>
-				<legend className="text-center my-4">
-					{titles.length} title(s) found....
-				</legend>
 				<Row className="g-4 my-2">
 					{titles.map((title, index) =>
 						index < endIndex ? (
@@ -26,11 +27,11 @@ const Explore = ({ titles }) => {
 					)}
 				</Row>
 				{endIndex < titles.length - 1 && (
-					<div className="text-center">
+					<div className="text-center my-4">
 						<Button
 							variant="outline-primary"
-							onClick={() => setEndIndex(endIndex + 10)}
-							size="md"
+							onClick={() => setEndIndex(endIndex + 11)}
+							size="lg"
 						>
 							Show more ...
 						</Button>

@@ -18,7 +18,7 @@ const Home = ({ mostPopular }) => {
 export async function getStaticProps(context) {
 	const projection = ["name", "poster", "language", "year", "rating", "genres"];
 	const sort = { rating: -1 };
-	const limit = 8;
+	const limit = 4;
 
 	const data = await getTitles({}, projection, sort, limit);
 

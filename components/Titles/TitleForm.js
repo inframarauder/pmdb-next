@@ -50,7 +50,7 @@ const TitleForm = () => {
 				plot: formData.plot,
 				poster: formData.poster,
 				trailerLink: formData.trailerLink,
-				rating: parseInt(formData.rating),
+				rating: parseFloat(formData.rating),
 				streamingOn: [],
 			};
 			if (formData.netflix) {
@@ -105,7 +105,9 @@ const TitleForm = () => {
 			{error && <Alert variant="danger">{error}</Alert>}
 			{success && <Alert variant="success">{success}</Alert>}
 			{loading ? (
-				<div className="text-center"></div>
+				<div className="text-center">
+					<Spinner animation="border" variant="white" />
+				</div>
 			) : (
 				<>
 					<Row className="mb-3">
