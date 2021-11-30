@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { Layout } from "../../components/common";
 import { TitleCard } from "../../components/Titles";
@@ -6,6 +6,8 @@ import styles from "../../styles/Explore.module.css";
 import { getTitles } from "../../utils/backend/services/title.service";
 
 const Explore = ({ titles }) => {
+	const [endIndex, setEndIndex] = useState(10);
+
 	return (
 		<Layout>
 			<Container className={styles.explore}>
@@ -13,12 +15,27 @@ const Explore = ({ titles }) => {
 					{titles.length} title(s) found....
 				</legend>
 				<Row className="g-4 my-2">
-					{titles.map((title) => (
-						<Col md={3} xs={6} key={title._id}>
-							<TitleCard title={title} />
-						</Col>
-					))}
+					{titles.map((title, index) =>
+						index < endIndex ? (
+							<Col md={3} xs={6} key={title._id}>
+								<TitleCard title={title} />
+							</Col>
+						) : (
+							<></>
+						)
+					)}
 				</Row>
+				{endIndex < titles.length - 1 && (
+					<div className="text-center">
+						<Button
+							variant="outline-primary"
+							onClick={() => setEndIndex(endIndex + 10)}
+							size="md"
+						>
+							Show more ...
+						</Button>
+					</div>
+				)}
 			</Container>
 		</Layout>
 	);
