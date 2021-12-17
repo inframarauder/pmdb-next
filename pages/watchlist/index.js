@@ -12,8 +12,16 @@ const Watchlist = () => {
 	useEffect(() => {
 		const getWatchlist = async () => {
 			setLoading(true);
-			const res = await api.get("/api/users/watchlist");
-			setWatchlist(res.data.watchlist);
+			try {
+				const res = await api.get("/api/users/watchlist");
+				setWatchlist(res.data.watchlist);
+			} catch (error) {
+				console.error(error);
+				if (error.response) {
+					alert(error.response.data.error);
+				}
+			}
+
 			setLoading(false);
 		};
 		getWatchlist();
